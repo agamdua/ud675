@@ -77,6 +77,13 @@ class PlotGraph(object):
             self.minimum_prediction_error
         )
 
+    @property
+    def variance_at_min_error(self):
+        return self.test_error[self.minimum_prediction_error_coordinates[0]]
+
+    @property
+    def bias_at_min_error(self):
+        return self.train_error[self.minimum_prediction_error_coordinates[0]]
 
     @classmethod
     def render(self):

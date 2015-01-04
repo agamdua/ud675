@@ -53,4 +53,6 @@ graph = PlotGraph(
 )
 graph.plot_prediction_error(xlabel='k')
 print graph.minimum_prediction_error_coordinates
+print graph.bias_at_min_error
+print graph.variance_at_min_error
 PlotGraph.render()

@@ -43,8 +43,7 @@ class PlotGraph(object):
         pl.ylabel(self.ylabel)
 
     def plot_prediction_error(self, title='Prediction Error from util', xlabel='X axis', ylabel='MS Error', display_info=False):
-        assert xlabel is not None
-        assert ylabel is not None
+        assert all([xlabel, ylabel])
 
         pl.figure(self.figure_number)
 

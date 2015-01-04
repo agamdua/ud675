@@ -53,4 +53,4 @@ graph = PlotGraph(
 )
 graph.plot_prediction_error(xlabel='k')
 
-pl.show()
+PlotGraph.render()

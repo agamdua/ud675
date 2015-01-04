@@ -61,8 +61,16 @@ class PlotGraph(object):
         pl.legend()
         pl.xlabel(xlabel)
         pl.ylabel(ylabel)
-        pl.show()
 
     @property
     def prediction_error(self):
         return np.square(self.test_error) + self.train_error
+
+    @classmethod
+    def render(self):
+        """
+        Convenience wrapper so that this can be called from this helper class
+
+        Syntactic sugar, thats all
+        """
+        pl.show()

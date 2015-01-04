@@ -52,5 +52,5 @@ graph = PlotGraph(
     k_range=k_range
 )
 graph.plot_prediction_error(xlabel='k')
-
+print graph.minimum_prediction_error_coordinates
 PlotGraph.render()

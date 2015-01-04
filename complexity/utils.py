@@ -42,7 +42,7 @@ class PlotGraph(object):
         pl.xlabel(self.xlabel)
         pl.ylabel(self.ylabel)
 
-    def plot_prediction_error(self, title='Prediction Error from util', xlabel='X axis', ylabel='MS Error'):
+    def plot_prediction_error(self, title='Prediction Error from util', xlabel='X axis', ylabel='MS Error', display_info=False):
         assert xlabel is not None
         assert ylabel is not None
 
@@ -61,6 +61,20 @@ class PlotGraph(object):
         pl.legend()
         pl.xlabel(xlabel)
         pl.ylabel(ylabel)
+
+        if display_info:
+            self.display_info()
+
+    def display_info(self):
+        print "Minimum prediction error coordinates: {}".format(
+            self.minimum_prediction_error_coordinates
+        )
+        print "Variance at this point: {}".format(
+            self.variance_at_min_error
+        )
+        print "Bias at this point: {}".format(
+            self.bias_at_min_error
+        )
 
     @property
     def prediction_error(self):
@@ -86,7 +100,7 @@ class PlotGraph(object):
         return self.train_error[self.minimum_prediction_error_coordinates[0]]
 
     @classmethod
-    def render(self):
+    def render(cls):
         """
         Convenience wrapper so that this can be called from this helper class
 

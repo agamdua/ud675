@@ -53,9 +53,5 @@ graph = PlotGraph(
     figure_number=2,
     k_range=max_depth
 )
-graph.plot_prediction_error(xlabel='Max Depth')
-print self.minimum_prediction_error_coordinates
-print self.bias_at_min_error
-print self.variance_at_min_error
-
+graph.plot_prediction_error(xlabel='Max Depth', display_info=True)
 PlotGraph.render()

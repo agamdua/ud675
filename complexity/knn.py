@@ -48,11 +48,8 @@ pl.ylabel('MS error')
 graph = PlotGraph(
     train_error=train_err,
     test_error=test_err,
-    figure_number=3,
+    figure_number=2,
     k_range=k_range
 )
-graph.plot_prediction_error(xlabel='k')
-print graph.minimum_prediction_error_coordinates
-print graph.bias_at_min_error
-print graph.variance_at_min_error
+graph.plot_prediction_error(xlabel='k', display_info=True)
 PlotGraph.render()

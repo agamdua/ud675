@@ -10,6 +10,8 @@ from sklearn.metrics import mean_squared_error
 from sklearn import datasets
 from sklearn.tree import DecisionTreeRegressor
 
+from utils import PlotGraph
+
 # Load the boston dataset and seperate it into training and testing set
 boston = datasets.load_boston()
 X, y = shuffle(boston.data, boston.target)
@@ -23,23 +25,34 @@ train_err = zeros(len(max_depth))
 test_err = zeros(len(max_depth))
 
 for i, d in enumerate(max_depth):
-	# Setup a Decision Tree Regressor so that it learns a tree with depth d
+    # Setup a Decision Tree Regressor so that it learns a tree with depth d
     regressor = DecisionTreeRegressor(max_depth=d)
-    
+
     # Fit the learner to the training data
     regressor.fit(X_train, y_train)
 
-	# Find the MSE on the training set
+    # Find the MSE on the training set
     train_err[i] = mean_squared_error(y_train, regressor.predict(X_train))
     # Find the MSE on the testing set
     test_err[i] = mean_squared_error(y_test, regressor.predict(X_test))
 
-# Plot training and test error as a function of the depth of the decision tree learnt
+# Plot training and test error as a function of the depth of the
+# decision tree learnt
 pl.figure()
 pl.title('Decision Trees: Performance vs Max Depth')
-pl.plot(max_depth, test_err, lw=2, label = 'test error')
-pl.plot(max_depth, train_err, lw=2, label = 'training error')
+pl.plot(max_depth, test_err, lw=2, label='test error')
+pl.plot(max_depth, train_err, lw=2, label='training error')
 pl.legend()
 pl.xlabel('Max Depth')
 pl.ylabel('MS Error')
-pl.show()
+
+# Bias^2, variance and prediction error
+graph = PlotGraph(
+    train_error=train_err,
+    test_error=test_err,
+    figure_number=2,
+    k_range=max_depth
+)
+graph.plot_prediction_error(xlabel='Max Depth')
+
+PlotGraph.render()

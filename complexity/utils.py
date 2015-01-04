@@ -50,10 +50,10 @@ class PlotGraph(object):
 
         pl.title(title)
         pl.plot(
-            self.k_range, np.square(self.test_error), lw=2, label='bias squared'
+            self.k_range, self.test_error, lw=2, label='variance'
         )
         pl.plot(
-            self.k_range, self.train_error, lw=2, label='variance'
+            self.k_range, np.square(self.train_error), lw=2, label='bias squared'
         )
         pl.plot(
             self.k_range, self.prediction_error, lw=2, label='prediction error'
@@ -65,6 +65,18 @@ class PlotGraph(object):
     @property
     def prediction_error(self):
         return np.square(self.test_error) + self.train_error
+
+    @property
+    def minimum_prediction_error(self):
+        return min(self.prediction_error)
+
+    @property
+    def minimum_prediction_error_coordinates(self):
+        return (
+            np.where(self.prediction_error==self.minimum_prediction_error)[0][0],
+            self.minimum_prediction_error
+        )
+
 
     @classmethod
     def render(self):

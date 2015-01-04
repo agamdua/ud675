@@ -10,6 +10,8 @@ from sklearn.utils import shuffle
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.metrics import mean_squared_error
 
+from utils import PlotGraph
+
 # Load the boston dataset and seperate it into training and testing set
 boston = datasets.load_boston()
 X, y = shuffle(boston.data, boston.target)
@@ -42,15 +44,13 @@ pl.plot(k_range, train_err, lw=2, label = 'training error')
 pl.legend()
 pl.xlabel('k')
 pl.ylabel('MS error')
-# pl.show()
 
-import numpy
-pl.figure(2)
-pl.title('Bias-variance tradeoff')
-pl.plot(k_range, numpy.square(test_err), lw=2, label = 'bias squared')
-pl.plot(k_range, train_err, lw=2, label = 'variance')
-pl.plot(k_range, numpy.square(test_err) + train_err, lw=2, label = 'prediction error')
-pl.legend()
-pl.xlabel('k')
-pl.ylabel('MS error')
+graph = PlotGraph(
+    train_error=train_err,
+    test_error=test_err,
+    figure_number=3,
+    k_range=k_range
+)
+graph.plot_prediction_error(xlabel='k')
+
 pl.show()
